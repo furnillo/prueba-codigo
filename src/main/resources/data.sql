@@ -1,0 +1,28 @@
+DROP TABLE IF EXISTS BRANDS;
+
+CREATE TABLE BRANDS (
+  ID INT AUTO_INCREMENT  PRIMARY KEY,
+  NAME VARCHAR(250) NOT NULL
+);
+
+INSERT INTO BRANDS (NAME) VALUES ('ZARA');
+
+DROP TABLE IF EXISTS PRICES;
+
+CREATE TABLE PRICES (
+  PRICE_LIST INT AUTO_INCREMENT  PRIMARY KEY,
+  BRAND_ID INT,
+  START_DATE TIMESTAMP NOT NULL,
+  END_DATE TIMESTAMP NOT NULL,
+  PRODUCT_ID INT NOT NULL,
+  PRIORITY INT NOT NULL,
+  PRICE DECIMAL(8,2) NOT NULL,
+  CURR CHAR(3) NOT NULL,
+  CONSTRAINT fk_prices_brands FOREIGN KEY (BRAND_ID) REFERENCES BRANDS (ID)
+);
+
+INSERT INTO PRICES (BRAND_ID, START_DATE, END_DATE, PRODUCT_ID, PRIORITY, PRICE, CURR) VALUES
+(1, parsedatetime('2020-06-14-00.00.00', 'yyyy-MM-dd-hh.mm.ss'), parsedatetime('2020-12-31-23.59.59', 'yyyy-MM-dd-hh.mm.ss'), 35455, 0, 35.50, 'EUR'),
+(1, parsedatetime('2020-06-14-15.00.00', 'yyyy-MM-dd-hh.mm.ss'), parsedatetime('2020-06-14-18.30.00', 'yyyy-MM-dd-hh.mm.ss'), 35455, 1, 25.45, 'EUR'),
+(1, parsedatetime('2020-06-15-00.00.00', 'yyyy-MM-dd-hh.mm.ss'), parsedatetime('2020-06-15-11.00.00', 'yyyy-MM-dd-hh.mm.ss'), 35455, 1, 30.50, 'EUR'),
+(1, parsedatetime('2020-06-15-16.00.00', 'yyyy-MM-dd-hh.mm.ss'), parsedatetime('2020-12-31-23.59.59', 'yyyy-MM-dd-hh.mm.ss'), 35455, 1, 38.95, 'EUR');
